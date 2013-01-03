@@ -17,25 +17,13 @@ function y = common_by_row(x)
 %  none, the routine should return the empty set. Also, the matrix might contain
 %  NaNs, repeats, or very large or very small elements.
 
-if ~isempty(x)
-    x = mat2cell(x, ones(1,size(x,1)), size(x,2));
-    y = getIntersection(x);
-else
+y = unique(x)';
+for i = 1:size(x,1)
+    y = intersect(y,x(i,:));
+end
+
+if isempty(y)
     y = [];
 end
-
-end
-
-function B = getIntersection(B)
-
-if length(B) == 1
-    B = B{1};
-    if isempty(B)
-        B = [];
-    end
-    return
-end
-B{2} = intersect(B{1},B{2});
-B = getIntersection(B(2:end));
 
 end
