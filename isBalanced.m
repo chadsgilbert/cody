@@ -1,18 +1,22 @@
 function tf = isBalanced(n)
+%  Given a positive integer find whether it is a balanced number. For a balanced
+%  number the sum of first half of digits is equal to the second half.
+%
+%  Examples:
+%
+%    Input  n = 13722 
+%    Output tf is true
+%
+%  because 1 + 3 = 2 + 2.
+%
+%     Input  n = 23567414 
+%     Output tf = true
+%
+%  All palindrome numbers are balanced.
+%
+%  This is partly from Project Euler, Problem 217.
 
-N = floor(log10(n));
-if mod(N,2) == 1
-    N = (N+1)/2;
-else
-    N = N/2;
-end
-n1 = floor(n/(10^N+1));
-n2 = rem(n,10^N);
-for i = 1:N
-    n1 = 
-    n2 = 
-end
-
-tf = n1 == n2;
+x = num2str(n);
+tf = sum(double(x(1:floor(end/2)))) == sum(double(x((ceil(end/2+1):end))));
 
 end
