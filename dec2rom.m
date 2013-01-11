@@ -21,45 +21,22 @@ function romStr = dec2rom(n)
 % Thousands.
 decStr = sprintf('%04d',n);
 romStr = char(repmat('M',1,str2double(decStr(1))));
+romStr = strcat(romStr,getNum(decStr(2),'MDC'));
+romStr = strcat(romStr,getNum(decStr(3),'CLX'));
+romStr = strcat(romStr,getNum(decStr(4),'XVI'));
 
-% Hundreds.
-if strcmp(decStr(2),'9'), 
-    romStr = strcat(romStr,'CM'); 
-elseif str2double(decStr(2)) > 4
-    romStr = strcat(romStr,'D'); 
-    decStr(2) = num2str(str2double(decStr(2))-5); 
-elseif strcmp(decStr(2), '4')
-    romStr = strcat(romStr,'CD');
-end
-if str2double(decStr(2)) < 4
-    romStr = strcat(romStr,repmat('C',1,str2double(decStr(2))));
 end
 
-% Tens.
-if strcmp(decStr(3),'9'),
-    romStr = strcat(romStr,'XC');
-elseif str2double(decStr(3)) > 4
-    romStr = strcat(romStr,'L');
-    decStr(3) = num2str(str2double(decStr(3))-5);
-elseif strcmp(decStr(3),'4')
-    romStr = strcat(romStr,'XL');
-end
-if str2double(decStr(3)) < 4
-    romStr = strcat(romStr,repmat('X',1,str2double(decStr(3))));
-end
+function c = getNum(n,d)
 
-% Ones.
-if strcmp(decStr(4),'9')
-    romStr = strcat(romStr,'IX');
-elseif str2double(decStr(4)) > 4
-    romStr = strcat(romStr,'V');
-    decStr(4) = num2str(str2double(decStr(4))-5);
-elseif strcmp(decStr(4),'4')
-    romStr = strcat(romStr,'IV');
+if strcmp(n,'9')
+    c = d([3 1]);
+elseif n > '4'
+    c = d([2 repmat(3,1,str2double(n)-5)]);
+elseif strcmp(n,'4')
+    c = d([3 2]);
+else
+    c = d(repmat(3,1,str2double(n)));
 end
-if str2double(decStr(4)) < 4
-    romStr = strcat(romStr,repmat('I',1,str2double(decStr(4))));
-end
-
 
 end
