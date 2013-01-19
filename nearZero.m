@@ -1,4 +1,4 @@
-function y = nearZero(x)
+function ans = nearZero(x)
 %  This example comes from Steve Eddins' blog: Learning Lessons from a One-Liner
 %
 %  Write a function that takes a list or array of numbers as input and return 
@@ -11,8 +11,7 @@ function y = nearZero(x)
 %
 %  This problem was originally posed by Greg Wilson of Software Carpentry.
 
-i = x==0;
-j = [i(2:end) 0] | [0 i(1:end-1)];
-y = max(x(j));
+mask = conv(double(x==0),[1 0 1]);
+max(x(mask(2:end-1)));
 
 end
